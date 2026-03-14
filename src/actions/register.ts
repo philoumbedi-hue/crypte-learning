@@ -17,7 +17,7 @@ export async function registerUser(data: {
     });
 
     if (existing) {
-        throw new Error("EMAIL_ALREADY_EXISTS");
+        return { error: "EMAIL_ALREADY_EXISTS" };
     }
 
     const hashedPassword = await bcrypt.hash(data.password, 10);
@@ -52,7 +52,7 @@ export async function registerUser(data: {
     } catch (e: unknown) {
         const message = e instanceof Error ? e.message : "Erreur inconnue";
         console.error("❌ Prisma User Creation Error:", message);
-        throw new Error("Failed to create user or verification token");
+        return { error: "FAILED_TO_CREATE_USER" };
     }
 
     console.log("✅ User registered - Confirmation email sent to:", cleanEmail);

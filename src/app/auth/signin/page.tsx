@@ -86,21 +86,25 @@ function AuthForm() {
         }
 
         try {
-            await registerUser({ name, email: regEmail, password: regPassword });
-            setSuccess("Votre compte a été créé avec succès ! Connectez-vous maintenant.");
+            const result = await registerUser({ name, email: regEmail, password: regPassword });
+
+            if ('error' in result && result.error) {
+                if (result.error === "EMAIL_ALREADY_EXISTS") {
+                    setError("Cet email est déjà utilisé. Essayez de vous connecter.");
+                } else {
+                    setError(`Erreur : ${result.error}`);
+                }
+                return;
+            }
+
+            setSuccess("Votre compte a été créé avec succès ! Veuillez vérifier votre email pour valider votre compte.");
             setTab("login");
             setRegEmail("");
             setRegPassword("");
             setRegConfirm("");
             setName("");
-        } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : "Erreur inconnue";
-            console.error("DEBUG: Registration failed with:", message);
-            if (message === "EMAIL_ALREADY_EXISTS") {
-                setError("Cet email est déjà utilisé. Essayez de vous connecter.");
-            } else {
-                setError(`Erreur : ${message}`);
-            }
+        } catch {
+            setError("Une erreur serveur est survenue lors de l'inscription.");
         } finally {
             setLoading(false);
         }
