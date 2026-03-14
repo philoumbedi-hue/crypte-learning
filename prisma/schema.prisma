@@ -1,0 +1,392 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id                  String          @id @default(uuid())
+  name                String?
+  email               String          @unique
+  password            String
+  emailVerified       DateTime?
+  role                Role            @default(STUDENT)
+  onboardingCompleted Boolean         @default(false)
+  phone               String?
+  nationality         String?
+  image               String?
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  certificates        Certificate[]
+  enrollments         Enrollment[]
+  progress            Progress[]
+  quizAttempts        QuizAttempt[]
+  results             Result[]
+  videoProgress       VideoProgress[]
+  activityLogs        ActivityLog[]
+  authoredCourses     Course[]
+  applications        Application[]
+  transactions        Transaction[]
+  forumQuestions      ForumQuestion[]
+  forumAnswers        ForumAnswer[]
+  notifications       Notification[]
+  reviews             Review[]
+}
+
+
+model Discipline {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  imageUrl    String?
+  courses     Course[]
+  applications Application[]
+}
+
+model Course {
+  id           String          @id @default(uuid())
+  title        String
+  description  String?
+  content      Json?           // Rich text (ProseMirror format)
+  disciplineId String
+  authorId     String?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  level        String?
+  imageUrl     String?
+  certificates Certificate[]
+  discipline   Discipline      @relation(fields: [disciplineId], references: [id])
+  author       User?           @relation(fields: [authorId], references: [id])
+  enrollments  Enrollment[]
+  modules      Module[]
+  liveSessions LiveSession[]
+  transactions Transaction[]
+
+  versions     CourseVersion[]
+  reviews      Review[]
+
+  @@unique([title, disciplineId])
+}
+
+model LiveSession {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  meetUrl     String
+  startTime   DateTime
+  endTime     DateTime?
+  status      String   @default("SCHEDULED") // SCHEDULED, LIVE, FINISHED
+
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CourseVersion {
+  id        String   @id @default(uuid())
+  courseId  String
+  content   Json
+  createdAt DateTime @default(now())
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+}
+
+model Module {
+  id                 String     @id @default(uuid())
+  title              String
+  description        String?
+  order              Int
+  courseId           String
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+  learningObjectives String?
+  theoryContent      String?
+  documents          Document[]
+  course             Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  progress           Progress[]
+  quizzes            Quiz[]
+  videos             Video[]
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  content   String   @db.Text
+  rating    Int?     // Facultatif : 1 à 5 étoiles
+  userId    String
+  courseId  String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([courseId])
+  @@index([userId])
+}
+
+
+model Video {
+  id            String          @id @default(uuid())
+  title         String
+  url           String
+  moduleId      String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  description   String?
+  duration      Int?
+  isRequired    Boolean         @default(true)
+  order         Int             @default(0)
+  type          String?
+  content       String?
+  module        Module          @relation(fields: [moduleId], references: [id])
+  videoProgress VideoProgress[]
+  forumQuestions ForumQuestion[]
+}
+
+model Document {
+  id          String   @id @default(uuid())
+  title       String
+  url         String
+  moduleId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  description String?
+  order       Int      @default(0)
+  module      Module   @relation(fields: [moduleId], references: [id])
+}
+
+model Quiz {
+  id           String        @id @default(uuid())
+  title        String
+  moduleId     String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  description  String?
+  maxAttempts  Int?
+  order        Int           @default(0)
+  passingScore Int?
+  timeLimit    Int?
+  weight       Int?
+  questions    Question[]
+  module       Module        @relation(fields: [moduleId], references: [id])
+  attempts     QuizAttempt[]
+  results      Result[]
+}
+
+model Question {
+  id             String          @id @default(uuid())
+  text           String
+  options        Json
+  correctAnswer  String
+  quizId         String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  answerAttempts AnswerAttempt[]
+  quiz           Quiz            @relation(fields: [quizId], references: [id])
+}
+
+model Result {
+  id        String   @id @default(uuid())
+  score     Float
+  studentId String
+  quizId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  student   User     @relation(fields: [studentId], references: [id])
+}
+
+model Enrollment {
+  id        String   @id @default(uuid())
+  studentId String
+  courseId  String
+  status    String   @default("ENROLLED")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  course    Course   @relation(fields: [courseId], references: [id])
+  student   User     @relation(fields: [studentId], references: [id])
+
+  @@unique([studentId, courseId])
+}
+
+model Progress {
+  id        String   @id @default(uuid())
+  studentId String
+  moduleId  String
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  module    Module   @relation(fields: [moduleId], references: [id])
+  student   User     @relation(fields: [studentId], references: [id])
+
+  @@unique([studentId, moduleId])
+}
+
+model Certificate {
+  id        String   @id @default(uuid())
+  studentId String
+  courseId  String
+  issuedAt  DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  course    Course   @relation(fields: [courseId], references: [id])
+  student   User     @relation(fields: [studentId], references: [id])
+
+  @@unique([studentId, courseId])
+}
+
+model VideoProgress {
+  id        String   @id @default(uuid())
+  studentId String
+  videoId   String
+  timestamp Float    @default(0)
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  student   User     @relation(fields: [studentId], references: [id])
+  video     Video    @relation(fields: [videoId], references: [id])
+
+  @@unique([studentId, videoId])
+}
+
+model QuizAttempt {
+  id        String          @id @default(uuid())
+  userId    String
+  quizId    String
+  score     Float
+  createdAt DateTime        @default(now())
+  answers   AnswerAttempt[]
+  quiz      Quiz            @relation(fields: [quizId], references: [id])
+  user      User            @relation(fields: [userId], references: [id])
+}
+
+model AnswerAttempt {
+  id            String      @id @default(uuid())
+  questionId    String
+  selectedValue String
+  isCorrect     Boolean
+  attemptId     String
+  attempt       QuizAttempt @relation(fields: [attemptId], references: [id])
+  question      Question    @relation(fields: [questionId], references: [id])
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN_ACADEMIC
+  ADMIN_CONTENT
+  ADMIN_STUDENT
+  ADMIN_FINANCE
+  MODERATOR
+  SUPPORT
+  TEACHER
+  STUDENT
+  ADMIN
+}
+
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  userId    String
+  action    String   // ex: "SUSPEND_STUDENT", "DELETE_COURSE", "PUBLISH_MODULE"
+  entity    String   // ex: "User", "Course", "Module"
+  entityId  String?  // ID de l'entité concernée
+  metadata  Json?    // Infos supplémentaires (avant/après, raison, etc.)
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model VerificationToken {
+  id         String   @id @default(uuid())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now())
+
+  @@unique([identifier, token])
+}
+
+model Application {
+  id                   String            @id @default(uuid())
+  userId               String
+  status               ApplicationStatus @default(PENDING)
+  motivationLetter     String            @db.Text
+  academicBackground   String            @db.Text
+  selectedDisciplineId String
+  interviewDate        DateTime?
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  user                 User              @relation(fields: [userId], references: [id])
+  discipline           Discipline        @relation(fields: [selectedDisciplineId], references: [id])
+}
+
+enum ApplicationStatus {
+  PENDING
+  REVIEWING
+  INTERVIEW
+  ACCEPTED
+  REJECTED
+}
+
+model Transaction {
+  id            String   @id @default(uuid())
+  userId        String
+  courseId      String
+  amount        Float
+  currency      String   @default("USD")
+  provider      String   // e.g., "STRIPE", "FLEXPAY"
+  providerRef   String?  // Transaction ID from the provider
+  status        String   @default("SUCCESS") // PENDING, SUCCESS, FAILED
+  createdAt     DateTime @default(now())
+
+  user          User     @relation(fields: [userId], references: [id])
+  course        Course   @relation(fields: [courseId], references: [id])
+}
+
+model ForumQuestion {
+  id            String   @id @default(uuid())
+  title         String
+  content       String   @db.Text
+  userId        String
+  videoId       String   // Linked to a specific video/lesson
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  isResolved    Boolean  @default(false)
+
+  user          User     @relation(fields: [userId], references: [id])
+  video         Video    @relation(fields: [videoId], references: [id])
+  answers       ForumAnswer[]
+}
+
+model ForumAnswer {
+  id            String   @id @default(uuid())
+  content       String   @db.Text
+  questionId    String
+  userId        String
+  isAccepted    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  question      ForumQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  user          User          @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id            String   @id @default(uuid())
+  userId        String
+  title         String
+  message       String
+  type          String   // e.g., "INFO", "SUCCESS", "WARNING"
+  link          String?  // Optional URL to redirect when clicked
+  isRead        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

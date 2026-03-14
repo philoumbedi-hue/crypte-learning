@@ -1,0 +1,431 @@
+Discipline:
+Nom: Intelligence Artificielle & Data Science
+Description: Formation de haut niveau aux technologies de l'IA moderne, alliant rigueur mathématique et applications industrielles.
+Cours:
+Titre: Fondamentaux de l'Apprentissage Automatique
+Description: Théories et algorithmes fondamentaux du Machine Learning.
+Niveau: Débutant
+Cours:
+Titre: Statistiques pour la Science des Données
+Description: Méthodes statistiques avancées pour l'analyse et l'inférence.
+Niveau: Débutant
+Cours:
+Titre: Python pour l'Analyse de Données
+Description: Maîtrise de l'écosystème Python pour le traitement scientifique.
+Niveau: Débutant
+Cours:
+Titre: Réseaux de Neurones & Deep Learning
+Description: Architecture et optimisation des réseaux de neurones profonds.
+Niveau: Intermédiaire
+Cours:
+Titre: Vision par Ordinateur
+Description: Traitement d'images et reconnaissance d'objets par deep learning.
+Niveau: Intermédiaire
+Cours:
+Titre: Traitement Automatique du Langage Naturel
+Description: Analyse linguistique et modèles de langage (NLP).
+Niveau: Intermédiaire
+Cours:
+Titre: MLOps & Déploiement de Modèles
+Description: Cycle de vie et industrialisation des modèles d'IA.
+Niveau: Avancé
+Cours:
+Titre: Éthique de l'Intelligence Artificielle
+Description: Enjeux philosophiques, légaux et moraux des algorithmes.
+Niveau: Débutant
+
+Discipline:
+Nom: Business & Innovation Technologique
+Description: Excellence managériale et stratégies d'innovation dans l'économie numérique globale.
+Cours:
+Titre: Fondamentaux du Management
+Description: Principes de gestion des organisations et des ressources humaines.
+Niveau: Débutant
+Cours:
+Titre: Stratégie d'Entreprise Moderne
+Description: Analyse stratégique et avantage concurrentiel à l'ère du web.
+Niveau: Intermédiaire
+Cours:
+Titre: Innovation & Transformation Digitale
+Description: Pilotage du changement technologique en entreprise.
+Niveau: Intermédiaire
+Cours:
+Titre: Business Model & Lean Startup
+Description: Méthodologies agiles pour la création de valeur.
+Niveau: Débutant
+Cours:
+Titre: Analyse Concurrentielle
+Description: Outils de veille et positionnement sur les marchés tech.
+Niveau: Intermédiaire
+Cours:
+Titre: Gestion de Projets Agile
+Description: Maîtrise des frameworks Scrum et Kanban.
+Niveau: Débutant
+Cours:
+Titre: Intelligence Économique
+Description: Collecte et analyse d'informations stratégiques.
+Niveau: Avancé
+Cours:
+Titre: Leadership Organisationnel
+Description: Développement des compétences de direction et d'impact.
+Niveau: Avancé
+
+Discipline:
+Nom: Leadership Africain & Gouvernance
+Description: Études approfondies des systèmes politiques et des modèles de leadership souverain pour le continent.
+Cours:
+Titre: Histoire des Systèmes Politiques Africains
+Description: Analyse des structures de pouvoir pré-coloniales et modernes.
+Niveau: Débutant
+Cours:
+Titre: Leadership Transformationnel
+Description: Modèles de leadership pour le changement sociétal.
+Niveau: Intermédiaire
+Cours:
+Titre: Gouvernance & Développement Durable
+Description: Équilibre entre gestion publique et impératifs écologiques.
+Niveau: Intermédiaire
+Cours:
+Titre: Diplomatie & Relations Internationales
+Description: L'Afrique dans le concert des nations et géopolitique.
+Niveau: Avancé
+Cours:
+Titre: Politiques Publiques & Réformes
+Description: Conception et évaluation des actions de l'État.
+Niveau: Avancé
+Cours:
+Titre: Éthique du Leadership
+Description: Devoirs moraux et intégrité des décideurs.
+Niveau: Débutant
+Cours:
+Titre: Gestion des Conflits
+Description: Médiation et résolution des tensions institutionnelles.
+Niveau: Intermédiaire
+Cours:
+Titre: Institutions & Souveraineté
+Description: Renforcement des cadres étatiques et indépendance.
+Niveau: Avancé
+
+Discipline:
+Nom: Finance, Blockchain & Cryptoéconomie
+Description: Expertise financière intégrée, allant de la finance de marché aux protocoles décentralisés.
+Cours:
+Titre: Principes de Finance d'Entreprise
+Description: Gestion de la valeur, investissement et financement.
+Niveau: Débutant
+Cours:
+Titre: Analyse Financière
+Description: Interprétation des états financiers et évaluation de solvabilité.
+Niveau: Intermédiaire
+Cours:
+Titre: Marchés Financiers Internationaux
+Description: Fonctionnement des places boursières et flux mondiaux.
+Niveau: Intermédiaire
+Cours:
+Titre: Introduction à la Blockchain
+Description: Fondements techniques et protocoles de consensus.
+Niveau: Débutant
+Cours:
+Titre: Smart Contracts
+Description: Programmation de contrats autonomes (Solidity/Rust).
+Niveau: Intermédiaire
+Cours:
+Titre: Cryptoéconomie
+Description: Théorie des jeux et incitations dans les réseaux décentralisés.
+Niveau: Avancé
+Cours:
+Titre: Finance Décentralisée (DeFi)
+Description: Protocoles bancaires et d'échange sur la blockchain.
+Niveau: Avancé
+Cours:
+Titre: Régulation & Conformité
+Description: Cadres juridiques et lutte contre le blanchiment (AML).
+Niveau: Intermédiaire
+
+Discipline:
+Nom: Cybersécurité & Souveraineté Numérique
+Description: Protection des actifs numériques et défense des infrastructures critiques.
+Cours:
+Titre: Fondamentaux de la Sécurité Informatique
+Description: Principes CIA et hygiène numérique de base.
+Niveau: Débutant
+Cours:
+Titre: Cryptographie
+Description: Algorithmes de chiffrement et signature numérique.
+Niveau: Intermédiaire
+Cours:
+Titre: Sécurité Réseau
+Description: Architecture défensive et pare-feux.
+Niveau: Intermédiaire
+Cours:
+Titre: Ethical Hacking
+Description: Tests d'intrusion et identification de vulnérabilités.
+Niveau: Avancé
+Cours:
+Titre: Protection des Données
+Description: Gestion de la confidentialité et des accès.
+Niveau: Débutant
+Cours:
+Titre: Cyberdéfense
+Description: Stratégies de réponse aux incidents et remédiation.
+Niveau: Avancé
+Cours:
+Titre: Audit de Sécurité
+Description: Évaluation de la conformité aux normes (ISO 27001).
+Niveau: Intermédiaire
+Cours:
+Titre: Gouvernance Numérique
+Description: Politiques de sécurité à l'échelle organisationnelle.
+Niveau: Avancé
+
+Discipline:
+Nom: Transformation Digitale & Cloud Computing
+Description: Digitalisation des infrastructures et agilité par le cloud.
+Cours:
+Titre: Architecture des Systèmes Cloud
+Description: Conception de solutions évolutives sur AWS/Azure.
+Niveau: Débutant
+Cours:
+Titre: DevOps
+Description: Culture et outils de collaboration dev/ops.
+Niveau: Intermédiaire
+Cours:
+Titre: Microservices
+Description: Conception d'architectures logicielles distribuées.
+Niveau: Avancé
+Cours:
+Titre: Infrastructure as Code
+Description: Automatisation des déploiements (Terraform/Ansible).
+Niveau: Intermédiaire
+Cours:
+Titre: Big Data
+Description: Traitement et stockage des données à grande échelle.
+Niveau: Intermédiaire
+Cours:
+Titre: Modernisation des Entreprises
+Description: Passage du legacy au numérique natif.
+Niveau: Avancé
+Cours:
+Titre: Stratégie Cloud
+Description: Choix des modèles (Public/Privé/Hybride).
+Niveau: Avancé
+Cours:
+Titre: Gouvernance IT
+Description: Gestion des services et alignement stratégique.
+Niveau: Intermédiaire
+
+Discipline:
+Nom: Éducation, EdTech & Pédagogie Alternative
+Description: Science de l'apprentissage et innovation pédagogique numérique.
+Cours:
+Titre: Théories de l'Apprentissage
+Description: Behaviorisme, cognitivisme et constructivisme.
+Niveau: Débutant
+Cours:
+Titre: Conception Pédagogique
+Description: Méthodologie ADDIE et design de parcours.
+Niveau: Intermédiaire
+Cours:
+Titre: E-learning & LMS
+Description: Technologies de formation à distance.
+Niveau: Débutant
+Cours:
+Titre: Gamification
+Description: Engager par les mécaniques ludiques.
+Niveau: Intermédiaire
+Cours:
+Titre: Évaluation des Compétences
+Description: Méthodes et outils de mesure de l'acquis.
+Niveau: Intermédiaire
+Cours:
+Titre: Innovation Éducative
+Description: Nouvelles tendances et pédagogies actives.
+Niveau: Avancé
+Cours:
+Titre: Éducation Inclusive
+Description: Accessibilité et besoins spécifiques.
+Niveau: Débutant
+Cours:
+Titre: Transformation des Systèmes Éducatifs
+Description: Réformes et vision stratégique de l'enseignement.
+Niveau: Avancé
+
+Discipline:
+Nom: Arts Visuels & Design Numérique
+Description: Communication visuelle et design d'expérience utilisateur.
+Cours:
+Titre: Fondamentaux du Design
+Description: Couleur, typographie et composition.
+Niveau: Débutant
+Cours:
+Titre: UX/UI Design
+Description: Design d'expérience et d'interface utilisateur.
+Niveau: Intermédiaire
+Cours:
+Titre: Design Thinking
+Description: Méthode de résolution créative de problèmes.
+Niveau: Débutant
+Cours:
+Titre: Motion Design
+Description: Animation graphique et vidéo.
+Niveau: Intermédiaire
+Cours:
+Titre: Identité Visuelle
+Description: Création de logos et chartes graphiques.
+Niveau: Intermédiaire
+Cours:
+Titre: Création de Contenu Digital
+Description: Production pour les plateformes sociales et web.
+Niveau: Débutant
+Cours:
+Titre: Design Produit
+Description: De l'idée à la forme physique ou numérique.
+Niveau: Avancé
+Cours:
+Titre: Esthétique & Communication Visuelle
+Description: Théorie de l'image et perception.
+Niveau: Intermédiaire
+
+Discipline:
+Nom: Entrepreneuriat & Stratégie de Croissance
+Description: Fondations académiques pour la création et le passage à l'échelle des entreprises.
+Cours:
+Titre: Création d'Entreprise
+Description: Aspects juridiques et opérationnels du démarrage.
+Niveau: Débutant
+Cours:
+Titre: Étude de Marché
+Description: Analyse de la demande et segmentation.
+Niveau: Débutant
+Cours:
+Titre: Stratégie de Croissance
+Description: Levage de fonds et expansion commerciale.
+Niveau: Intermédiaire
+Cours:
+Titre: Levée de Fonds
+Description: Venture Capital et relations investisseurs.
+Niveau: Avancé
+Cours:
+Titre: Gestion des Risques
+Description: Identification et atténuation des menaces business.
+Niveau: Intermédiaire
+Cours:
+Titre: Scaling & Expansion
+Description: Passage d'une startup à une PME structurée.
+Niveau: Avancé
+Cours:
+Titre: Écosystèmes d'Innovation
+Description: Rôle des incubateurs et des clusters technologiques.
+Niveau: Intermédiaire
+Cours:
+Titre: Entrepreneuriat Social
+Description: Business modèles à impact sociétal.
+Niveau: Débutant
+
+Discipline:
+Nom: Droit des Affaires & Éthique Numérique
+Description: Cadre juridique des transactions commerciales et enjeux moraux de la technologie.
+Cours:
+Titre: Droit Commercial
+Description: Actes de commerce et statut du commerçant.
+Niveau: Débutant
+Cours:
+Titre: Contrats & Responsabilité
+Description: Obligation et exécution des conventions.
+Niveau: Intermédiaire
+Cours:
+Titre: Droit du Numérique
+Description: Régulation d'Internet et des plateformes.
+Niveau: Intermédiaire
+Cours:
+Titre: Protection des Données
+Description: RGPD et conformité vie privée.
+Niveau: Débutant
+Cours:
+Titre: Propriété Intellectuelle
+Description: Droit d'auteur, brevets et marques.
+Niveau: Intermédiaire
+Cours:
+Titre: Conformité Réglementaire
+Description: Compliance et lutte contre la fraude.
+Niveau: Avancé
+Cours:
+Titre: Éthique Technologique
+Description: Responsabilité des ingénieurs et de la tech.
+Niveau: Débutant
+Cours:
+Titre: Gouvernance Juridique
+Description: Cadre légal de la direction d'entreprise.
+Niveau: Avancé
+
+Discipline:
+Nom: Santé, Biotechnologie & Bien-être
+Description: Excellence scientifique appliquée à la santé humaine et à l'innovation médicale.
+Cours:
+Titre: Introduction à la Biotechnologie
+Description: Manipulation du vivant pour la santé et l'industrie.
+Niveau: Débutant
+Cours:
+Titre: Santé Publique
+Description: Gestion de la santé à l'échelle des populations.
+Niveau: Débutant
+Cours:
+Titre: Innovation Médicale
+Description: Nouvelles thérapies et dispositifs.
+Niveau: Intermédiaire
+Cours:
+Titre: Bioéthique
+Description: Dilemmes moraux de la recherche médicale.
+Niveau: Intermédiaire
+Cours:
+Titre: Nutrition & Performance
+Description: Science de l'alimentation appliquée au métabolisme.
+Niveau: Débutant
+Cours:
+Titre: Technologies Médicales
+Description: Imagerie, capteurs et robotique chirurgicale.
+Niveau: Intermédiaire
+Cours:
+Titre: Santé Digitale
+Description: E-santé et objets connectés.
+Niveau: Intermédiaire
+Cours:
+Titre: Gestion des Systèmes de Santé
+Description: Organisation et économie du secteur médical.
+Niveau: Avancé
+
+Discipline:
+Nom: Développement Personnel & Efficacité
+Description: Méthodologie de la performance académique et personnelle de haut niveau.
+Cours:
+Titre: Gestion du Temps
+Description: Techniques de planification et d'optimisation horaire.
+Niveau: Débutant
+Cours:
+Titre: Discipline & Performance
+Description: Psychologie de l'effort et de la persévérance.
+Niveau: Débutant
+Cours:
+Titre: Intelligence Émotionnelle
+Description: Maîtrise de soi et empathie relationnelle.
+Niveau: Débutant
+Cours:
+Titre: Communication Avancée
+Description: Art de convaincre et négociation de haut niveau.
+Niveau: Intermédiaire
+Cours:
+Titre: Prise de Décision
+Description: Biais cognitifs et modèles décisionnels.
+Niveau: Intermédiaire
+Cours:
+Titre: Leadership Personnel
+Description: Développer sa vision et son influence.
+Niveau: Intermédiaire
+Cours:
+Titre: Productivité Académique
+Description: Méthodes de travail pour l'excellence d'étude.
+Niveau: Débutant
+Cours:
+Titre: Méthodologie de Recherche
+Description: Rigueur scientifique et rédaction de thèse.
+Niveau: Avancé

@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Premium Academic Light Palette */
+    --background: #ffffff;
+    --foreground: #0f172a;
+    /* Deep Slate */
+
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+
+    --primary: #4f46e5;
+    /* Indigo-600 */
+    --primary-foreground: #ffffff;
+
+    --muted: #f1f5f9;
+    /* Slate-100 */
+    --muted-foreground: #64748b;
+    /* Slate-500 */
+
+    --accent: #eef2ff;
+    /* Indigo-50 */
+    --accent-foreground: #4f46e5;
+
+    --border: #e2e8f0;
+    /* Slate-200 */
+    --ring: #6366f1;
+    /* Indigo-500 */
+
+    --radius: 1rem;
+  }
+
+  /* Keep dark variables but focus on light for this design */
+  .dark {
+    --background: #030303;
+    --foreground: #fafafa;
+    --card: #09090b;
+    --card-foreground: #fafafa;
+    --primary: #818cf8;
+    --primary-foreground: #ffffff;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    --accent: #1e1b4b;
+    --accent-foreground: #818cf8;
+    --border: #334155;
+    --ring: #818cf8;
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply antialiased selection:bg-indigo-100 selection:text-indigo-900;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-serif {
+    font-family: inherit;
+    /* Fallback, would prefer a Serif font if available */
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-sm;
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-2xl border border-white/10;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-400;
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .shadow-premium {
+    box-shadow: 0 20px 50px rgba(79, 70, 229, 0.08);
+  }
+}
