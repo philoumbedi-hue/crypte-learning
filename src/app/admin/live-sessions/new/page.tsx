@@ -71,26 +71,26 @@ export default async function NewLiveSessionPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div className="space-y-4">
                         <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400 flex items-center gap-2">
-                            <Video className="w-3.5 h-3.5" /> Titre de la Session
+                            <Video className="w-3.5 h-3.5" /> Titre du cours magistral
                         </label>
                         <input
                             name="title"
                             required
-                            placeholder="ex: Introduction à la Cryptographie"
+                            placeholder="ex: Sécurité des Infrastructures Critiques"
                             className="w-full p-5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-700 focus:ring-2 focus:ring-indigo-500 transition-all font-bold"
                         />
                     </div>
 
                     <div className="space-y-4">
                         <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400 flex items-center gap-2">
-                            <ArrowLeft className="w-3.5 h-3.5 rotate-90" /> Faculté / Cours Associé
+                            <ArrowLeft className="w-3.5 h-3.5 rotate-90" /> Faculté / Matière
                         </label>
                         <select
                             name="courseId"
                             required
                             className="w-full p-5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-700 focus:ring-2 focus:ring-indigo-500 transition-all font-bold appearance-none"
                         >
-                            <option value="">Sélectionner un cours...</option>
+                            <option value="">Sélectionner une discipline...</option>
                             {courses.map(course => (
                                 <option key={course.id} value={course.id}>{course.title}</option>
                             ))}
@@ -100,38 +100,21 @@ export default async function NewLiveSessionPage() {
 
                 <div className="space-y-4">
                     <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400 flex items-center gap-2">
-                        <LinkIcon className="w-3.5 h-3.5" /> Lien de Visioconférence
-                    </label>
-                    <div className="flex items-center gap-4 p-5 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800">
-                        <div className="p-3 bg-indigo-100 dark:bg-indigo-800 rounded-xl">
-                            <RefreshCw className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-                        </div>
-                        <div>
-                            <div className="font-bold text-sm text-indigo-900 dark:text-indigo-100">Génération Automatique</div>
-                            <div className="text-xs text-indigo-600/70 dark:text-indigo-400/70 font-medium">
-                                Un lien unique et sécurisé (Jitsi Meet) sera créé automatiquement lors de la validation.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="space-y-4">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400 flex items-center gap-2">
-                        <Zap className="w-3.5 h-3.5 text-yellow-500" /> Type de Lancement
+                        <Zap className="w-3.5 h-3.5 text-yellow-500" /> Mode de Session
                     </label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <label className="relative flex items-start gap-4 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 cursor-pointer hover:border-indigo-500 transition-colors group">
-                            <input type="radio" name="isInstant" value="false" defaultChecked className="mt-1 w-4 h-4 text-indigo-600 focus:ring-indigo-500" />
+                        <label className="relative flex items-start gap-4 p-5 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 cursor-pointer hover:border-indigo-500 transition-colors group">
+                            <input type="radio" name="isInstant" value="true" defaultChecked className="mt-1 w-4 h-4 text-indigo-600 focus:ring-indigo-500" />
                             <div>
-                                <h4 className="font-bold text-sm">Programmer pour plus tard</h4>
-                                <p className="text-xs text-zinc-500 mt-1">Définissez une date et une heure précises. Les étudiants seront notifiés.</p>
+                                <h4 className="font-bold text-sm text-indigo-600">Lancer & Entrer en salle (Direct)</h4>
+                                <p className="text-[10px] text-zinc-500 mt-1 italic">Recommandé : Vous entrez immédiatement dans la salle de classe virtuelle.</p>
                             </div>
                         </label>
-                        <label className="relative flex items-start gap-4 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 cursor-pointer hover:border-indigo-500 transition-colors group">
-                            <input type="radio" name="isInstant" value="true" className="mt-1 w-4 h-4 text-indigo-600 focus:ring-indigo-500" />
+                        <label className="relative flex items-start gap-4 p-5 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 cursor-pointer hover:border-indigo-500 transition-colors group">
+                            <input type="radio" name="isInstant" value="false" className="mt-1 w-4 h-4 text-indigo-600 focus:ring-indigo-500" />
                             <div>
-                                <h4 className="font-bold text-sm text-indigo-600">Lancer Immédiatement</h4>
-                                <p className="text-xs text-zinc-500 mt-1">La session passe directement en statut &quot;LIVE&quot;.</p>
+                                <h4 className="font-bold text-sm">Programmer pour un horaire fixe</h4>
+                                <p className="text-[10px] text-zinc-500 mt-1">La session apparaîtra dans le calendrier des étudiants.</p>
                             </div>
                         </label>
                     </div>
