@@ -1,7 +1,7 @@
 "use client";
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
-import { Users, Award, TrendingUp, BookOpen, Clock, FileText, CreditCard, UserPlus, Radio, Shield } from "lucide-react";
+import { Users, TrendingUp, BookOpen, Clock, FileText, CreditCard, UserPlus, Radio, Shield } from "lucide-react";
 import Link from "next/link";
 
 interface AnalyticsDashboardProps {

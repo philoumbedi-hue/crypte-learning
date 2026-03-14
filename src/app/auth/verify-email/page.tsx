@@ -7,7 +7,6 @@ import Link from "next/link";
 
 function VerifyEmailContent() {
     const searchParams = useSearchParams();
-    const router = useRouter();
     const token = searchParams.get("token");
     const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
     const [message, setMessage] = useState("Vérification de votre compte...");
@@ -36,7 +35,7 @@ function VerifyEmailContent() {
                     setStatus("error");
                     setMessage(data.error || "Le lien est invalide ou a expiré.");
                 }
-            } catch (err) {
+            } catch {
                 setStatus("error");
                 setMessage("Une erreur est survenue lors de la vérification.");
             }

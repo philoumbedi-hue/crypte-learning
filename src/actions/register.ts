@@ -24,7 +24,7 @@ export async function registerUser(data: {
 
     // Create user with emailVerified set to null
     try {
-        const user = await db.user.create({
+        await db.user.create({
             data: {
                 name: data.name,
                 email: cleanEmail,
