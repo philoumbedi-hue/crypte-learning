@@ -121,14 +121,12 @@ export default async function LiveSessionsPage() {
                                             </div>
                                         </td>
                                         <td className="p-6">
-                                            <a
-                                                href={session.meetUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                            <Link
+                                                href={`/live/${session.id}`}
                                                 className="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-bold text-xs group"
                                             >
-                                                Accéder à la Visio <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                                            </a>
+                                                Accéder à la plateforme <Video className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                                            </Link>
                                         </td>
                                         <td className="p-6 text-right">
                                             <form action={async () => {

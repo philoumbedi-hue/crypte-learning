@@ -39,7 +39,7 @@ export default async function NewLiveSessionPage() {
             status = "SCHEDULED";
         }
 
-        await createLiveSession({
+        const session = await createLiveSession({
             title,
             description,
             meetUrl,
@@ -49,7 +49,7 @@ export default async function NewLiveSessionPage() {
             status
         });
 
-        redirect("/admin/live-sessions");
+        redirect(`/live/${session.id}`);
     }
 
     return (
