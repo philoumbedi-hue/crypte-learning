@@ -1,3 +1,4 @@
+// @ts-expect-error: Package is installed but types are missing due to peer dependency issues
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
