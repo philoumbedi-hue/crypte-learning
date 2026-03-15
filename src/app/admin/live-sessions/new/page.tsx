@@ -2,7 +2,7 @@ import db from "@/lib/db";
 import { createLiveSession } from "@/actions/live-session";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Video, Calendar, Link as LinkIcon, AlignLeft, Clock, Zap, RefreshCw } from "lucide-react";
+import { ArrowLeft, Video, Calendar, AlignLeft, Clock, Zap } from "lucide-react";
 import crypto from "crypto";
 
 export default async function NewLiveSessionPage() {

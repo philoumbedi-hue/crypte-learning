@@ -1,6 +1,7 @@
+```
 import db from "@/lib/db";
 import Link from "next/link";
-import { Plus, Video, Calendar, Clock, ExternalLink, Trash2, Radio, ArrowLeft } from "lucide-react";
+import { ArrowLeft, Video, Plus, Calendar, Clock, Trash2, CheckCircle, XCircle } from "lucide-react";
 import { deleteLiveSession, updateLiveSessionStatus } from "@/actions/live-session";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -70,7 +71,7 @@ export default async function LiveSessionsPage() {
                                     <tr key={session.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/30 transition-colors group">
                                         <td className="p-6">
                                             <div className="flex items-center gap-4">
-                                                <div className={`p-3 rounded-xl ${session.status === "LIVE" ? "bg-red-100 text-red-600" : "bg-zinc-100 dark:bg-zinc-800 text-indigo-500"} group-hover:scale-110 transition-transform`}>
+                                                <div className={`p - 3 rounded - xl ${ session.status === "LIVE" ? "bg-red-100 text-red-600" : "bg-zinc-100 dark:bg-zinc-800 text-indigo-500" } group - hover: scale - 110 transition - transform`}>
                                                     {session.status === "LIVE" ? <Radio className="w-5 h-5 animate-pulse" /> : <Video className="w-5 h-5" />}
                                                 </div>
                                                 <div>
@@ -88,14 +89,14 @@ export default async function LiveSessionsPage() {
                                                 <div className="flex items-center gap-2 text-[10px] font-medium text-zinc-400">
                                                     <Clock className="w-3.5 h-3.5" />
                                                     {format(new Date(session.startTime), "p", { locale: fr })}
-                                                    {session.endTime && ` — ${format(new Date(session.endTime), "p", { locale: fr })}`}
+                                                    {session.endTime && ` — ${ format(new Date(session.endTime), "p", { locale: fr }) } `}
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="p-6">
                                             <div className="space-y-3">
                                                 {/* Current status badge */}
-                                                <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${STATUS_STYLES[session.status] || "bg-zinc-100 text-zinc-500"}`}>
+                                                <span className={`px - 3 py - 1 rounded - full text - [10px] font - black uppercase tracking - widest ${ STATUS_STYLES[session.status] || "bg-zinc-100 text-zinc-500" } `}>
                                                     {session.status}
                                                 </span>
                                                 {/* Status toggle buttons */}
@@ -107,11 +108,12 @@ export default async function LiveSessionsPage() {
                                                         }}>
                                                             <button
                                                                 type="submit"
-                                                                title={`Passer en ${targetStatus}`}
-                                                                className={`px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border transition-all hover:opacity-80 ${targetStatus === "LIVE" ? "bg-red-50 text-red-600 border-red-200 hover:bg-red-100" :
-                                                                    targetStatus === "FINISHED" ? "bg-zinc-50 text-zinc-500 border-zinc-200 hover:bg-zinc-100" :
-                                                                        "bg-indigo-50 text-indigo-600 border-indigo-200 hover:bg-indigo-100"
-                                                                    }`}
+                                                                title={`Passer en ${ targetStatus } `}
+                                                                className={`px - 2 py - 1 rounded - lg text - [9px] font - black uppercase tracking - widest border transition - all hover: opacity - 80 ${
+    targetStatus === "LIVE" ? "bg-red-50 text-red-600 border-red-200 hover:bg-red-100" :
+    targetStatus === "FINISHED" ? "bg-zinc-50 text-zinc-500 border-zinc-200 hover:bg-zinc-100" :
+        "bg-indigo-50 text-indigo-600 border-indigo-200 hover:bg-indigo-100"
+} `}
                                                             >
                                                                 {targetStatus === "LIVE" ? "▶ Lancer" : targetStatus === "FINISHED" ? "✓ Terminer" : "⏸ Programmer"}
                                                             </button>
@@ -122,7 +124,7 @@ export default async function LiveSessionsPage() {
                                         </td>
                                         <td className="p-6">
                                             <Link
-                                                href={`/live/${session.id}`}
+                                                href={`/ live / ${ session.id } `}
                                                 className="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-bold text-xs group"
                                             >
                                                 Accéder à la plateforme <Video className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />

@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import { Video } from "lucide-react";
-import LiveMeetingOverlay from "./LiveMeetingOverlay";
 
 interface LiveMeetingTriggerProps {
     sessionId: string;
