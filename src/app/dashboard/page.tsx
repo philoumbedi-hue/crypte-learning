@@ -196,12 +196,7 @@ export default async function DashboardPage() {
                                                 </div>
                                                 <LiveMeetingTrigger
                                                     sessionId={sessionItem.id}
-                                                    roomName={sessionItem.meetUrl.split('/').pop() || sessionItem.id}
-                                                    userName={session.user.name || "Étudiant"}
-                                                    userEmail={session.user.email || ""}
                                                     isAdmin={isAdminRole(session.user.role as Role) || session.user.role === "TEACHER"}
-                                                    courseTitle={sessionItem.course.title}
-                                                    sessionTitle={sessionItem.title}
                                                     buttonClassName="w-full md:w-auto px-10 py-4 bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl hover:bg-red-700 transition-all shadow-xl shadow-red-500/20 text-center"
                                                 />
                                             </div>

@@ -75,12 +75,7 @@ export function LiveSessionCard({ session, user }: LiveSessionCardProps) {
                     {isLive ? (
                         <LiveMeetingTrigger
                             sessionId={session.id}
-                            roomName={session.meetUrl.split('/').pop() || session.id}
-                            userName={user?.name || "Invité"}
-                            userEmail={user?.email || ""}
                             isAdmin={isAdmin}
-                            courseTitle={session.course.title}
-                            sessionTitle={session.title}
                         />
                     ) : (
                         <div className="w-full py-4 rounded-2xl flex items-center justify-center gap-2 font-black uppercase tracking-widest text-[10px] bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 cursor-not-allowed">

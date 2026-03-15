@@ -6,12 +6,7 @@ import LiveMeetingOverlay from "./LiveMeetingOverlay";
 
 interface LiveMeetingTriggerProps {
     sessionId: string;
-    roomName: string;
-    userName: string;
-    userEmail: string;
     isAdmin: boolean;
-    courseTitle: string;
-    sessionTitle: string;
     buttonClassName?: string;
     buttonLabel?: string;
 }
