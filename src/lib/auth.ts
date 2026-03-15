@@ -21,32 +21,19 @@ export const authOptions: NextAuthOptions = {
                     throw new Error("Missing credentials");
                 }
 
-                // 1. Authenticate with Supabase
-                const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-                    email: cleanEmail,
-                    password: credentials.password,
-                });
+                // 1. Authenticate with Firebase
+                const { signInWithEmailAndPassword } = await import("firebase/auth");
+                const { auth } = await import("@/lib/firebase");
 
-                if (authError) {
-                    console.error("❌ Supabase Auth Detailed Error:", {
-                        message: authError.message,
-                        status: authError.status,
-                        email: cleanEmail
-                    });
-
-                    if (authError.message.includes("Email not confirmed")) {
-                        throw new Error("EMAIL_NOT_VERIFIED");
-                    }
-                    // Throw the specific message if it's helpful
-                    throw new Error("Invalid credentials");
-                }
-
-                if (!authData.user) {
-                    throw new Error("Authentication failed");
-                }
-
-                // 2. Fetch User metadata from Prisma
                 try {
+                    const userCredential = await signInWithEmailAndPassword(auth, cleanEmail, credentials.password);
+                    const firebaseUser = userCredential.user;
+
+                    if (!firebaseUser) {
+                        throw new Error("Authentication failed");
+                    }
+
+                    // 2. Fetch User metadata from Prisma
                     const user = await db.user.findUnique({
                         where: { email: cleanEmail },
                     });
@@ -60,10 +47,14 @@ export const authOptions: NextAuthOptions = {
                         name: user.name,
                         email: user.email,
                         role: user.role,
-                        emailVerified: user.emailVerified || (authData.user.email_confirmed_at ? new Date(authData.user.email_confirmed_at) : null),
+                        emailVerified: user.emailVerified || (firebaseUser.emailVerified ? new Date() : null),
                     };
-                } catch {
-                    throw new Error("Internal sync error");
+                } catch (err: any) {
+                    console.error("❌ Firebase Auth Error:", err.message);
+                    if (err.code === "auth/user-not-found" || err.code === "auth/wrong-password" || err.code === "auth/invalid-credential") {
+                        throw new Error("Invalid credentials");
+                    }
+                    throw new Error(err.message || "Authentication failed");
                 }
             },
         }),

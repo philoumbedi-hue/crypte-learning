@@ -1,5 +1,6 @@
 import db from "@/lib/db";
-import { supabase } from "@/lib/supabase";
+import { auth } from "@/lib/firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export async function registerUser(data: {
     name: string;
@@ -8,55 +9,38 @@ export async function registerUser(data: {
 }) {
     const cleanEmail = data.email.trim().toLowerCase();
 
-    // Determine the base URL for redirection
-    const baseUrl = process.env.NEXTAUTH_URL && !process.env.NEXTAUTH_URL.includes("localhost")
-        ? process.env.NEXTAUTH_URL
-        : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://crypte-learning.vercel.app");
-
-    // 1. Supabase Auth Sign Up (Sends email automatically)
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: cleanEmail,
-        password: data.password,
-        options: {
-            data: {
-                full_name: data.name,
-            },
-            emailRedirectTo: `${baseUrl}/auth/callback`,
-        },
-    });
-
-    if (authError) {
-        console.error("❌ Supabase Auth Error:", authError.message);
-        if (authError.message.includes("already registered")) {
-            return { error: "EMAIL_ALREADY_EXISTS" };
-        }
-        return { error: authError.message };
-    }
-
-    if (!authData.user) {
-        return { error: "FAILED_TO_CREATE_USER" };
-    }
-
-    // 2. Synchronize with Prisma User Table
     try {
+        // 1. Firebase Auth Sign Up
+        const userCredential = await createUserWithEmailAndPassword(auth, cleanEmail, data.password);
+        const firebaseUser = userCredential.user;
+
+        if (data.name) {
+            await updateProfile(firebaseUser, { displayName: data.name });
+        }
+
+        // 2. Synchronize with Prisma User Table
         const existingUser = await db.user.findUnique({ where: { email: cleanEmail } });
 
         if (!existingUser) {
             await db.user.create({
                 data: {
-                    id: authData.user.id, // Using Supabase Auth ID
+                    id: firebaseUser.uid, // Using Firebase Auth UID
                     name: data.name,
                     email: cleanEmail,
-                    password: "SUPABASE_AUTH_ENCRYPTED", // Dummy password since we'll use Supabase for Auth
+                    password: "FIREBASE_AUTH_MANAGED",
                     onboardingCompleted: false,
                 },
             });
         }
-    } catch (e: unknown) {
-        console.error("❌ Prisma Sync Error:", e);
-        // We don't return error here because the user is already created in Supabase Auth
-    }
 
-    console.log("✅ User registered via Supabase Auth - Confirmation email sent to:", cleanEmail);
-    return { success: true, email: cleanEmail };
+        console.log("✅ User registered via Firebase Auth:", cleanEmail);
+        return { success: true, email: cleanEmail };
+
+    } catch (error: any) {
+        console.error("❌ Firebase Auth Error:", error.message);
+        if (error.code === "auth/email-already-in-use") {
+            return { error: "EMAIL_ALREADY_EXISTS" };
+        }
+        return { error: error.message };
+    }
 }

@@ -97,7 +97,7 @@ function AuthForm() {
                 return;
             }
 
-            setSuccess("Votre compte a été créé avec succès ! Veuillez vérifier votre email pour valider votre compte.");
+            setSuccess("Votre compte a été créé avec succès ! Si la vérification est activée, vous recevrez un email sous peu.");
             setTab("login");
             setRegEmail("");
             setRegPassword("");
