@@ -8,6 +8,11 @@ export async function registerUser(data: {
 }) {
     const cleanEmail = data.email.trim().toLowerCase();
 
+    // Determine the base URL for redirection
+    const baseUrl = process.env.NEXTAUTH_URL && !process.env.NEXTAUTH_URL.includes("localhost")
+        ? process.env.NEXTAUTH_URL
+        : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://crypte-learning.vercel.app");
+
     // 1. Supabase Auth Sign Up (Sends email automatically)
     const { data: authData, error: authError } = await supabase.auth.signUp({
         email: cleanEmail,
@@ -16,7 +21,7 @@ export async function registerUser(data: {
             data: {
                 full_name: data.name,
             },
-            emailRedirectTo: `${process.env.NEXTAUTH_URL}/auth/callback`,
+            emailRedirectTo: `${baseUrl}/auth/callback`,
         },
     });
 
