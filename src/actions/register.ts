@@ -36,7 +36,8 @@ export async function registerUser(data: {
         console.log("✅ User registered via Firebase Auth:", cleanEmail);
         return { success: true, email: cleanEmail };
 
-    } catch (error: any) {
+    } catch (err: unknown) {
+        const error = err as any; // eslint-disable-line @typescript-eslint/no-explicit-any
         console.error("❌ Firebase Auth Error:", error.message);
         if (error.code === "auth/email-already-in-use") {
             return { error: "EMAIL_ALREADY_EXISTS" };
