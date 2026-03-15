@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface JitsiMeetComponentProps {
     roomName: string;
@@ -43,26 +44,32 @@ export default function JitsiMeetComponent({ roomName, userName, userEmail, isAd
                     prejoinConfig: {
                         enabled: false                  // Sécurité supplémentaire pour l'entrée directe
                     },
-                    startWithAudioMuted: false,
-                    startWithVideoMuted: false,
+                    // COURS MAGISTRAL : L'enseignant démarre avec micro/cam, l'étudiant est muet
+                    startWithAudioMuted: !isAdmin,
+                    startWithVideoMuted: !isAdmin,
+
                     disableDeepLinking: true,           // Reste dans le navigateur sur mobile
                     disableBeforeUnloadHandlers: true,
                     enableLayerSuspension: true,
                     disableAudioLevels: true,
-                    enableWelcomePage: false,           // Pas de page d'accueil Jitsi
-                    enableClosePage: false,             // Pas de page de fermeture Jitsi
-                    // Masquer les options de connexion tierces
+                    enableWelcomePage: false,
+                    enableClosePage: false,
                     disableThirdPartyRequests: true,
+
+                    // SEUL L'ENSEIGNANT DOIT S'AFFICHER : On cache la mosaïque pour les étudiants
+                    tileView: {
+                        enabled: isAdmin // Seul l'admin voit la mosaïque s'il veut
+                    },
                 },
                 interfaceConfigOverwrite: {
-                    SHOW_JITSI_WATERMARK: false,        // Masque le logo Jitsi
+                    SHOW_JITSI_WATERMARK: false,
                     SHOW_WATERMARK_FOR_GUESTS: false,
                     DEFAULT_REMOTE_DISPLAY_NAME: 'Étudiant CRYPTE',
                     TOOLBAR_BUTTONS: [
                         'microphone', 'camera', 'desktop', 'fullscreen',
                         'fodeviceselection', 'hangup', 'profile', 'chat',
-                        'settings', 'videoquality', 'filmstrip', 'tileview',
-                        ...(isAdmin ? ['recording', 'mute-everyone'] : []) // Contrôles maître seulement pour admin
+                        'settings', 'videoquality',
+                        ...(isAdmin ? ['tileview', 'recording', 'mute-everyone'] : [])
                     ],
                 }
             };
@@ -70,10 +77,20 @@ export default function JitsiMeetComponent({ roomName, userName, userEmail, isAd
             // @ts-expect-error - JitsiMeetExternalAPI is loaded from external script
             const api = new window.JitsiMeetExternalAPI(domain, options);
 
-            // Forcer le nom si Jitsi l'oublie
+            // Forcer le nom
             api.executeCommand('displayName', userName);
 
-            // Gestion de la sortie automatique pour éviter la latence
+            // ALERTES D'ARRIVEE POUR L'ENSEIGNANT
+            if (isAdmin) {
+                api.addEventListener('participantJoined', (participant: { displayName: string }) => {
+                    toast.success(`${participant.displayName} a rejoint le cours`, {
+                        position: "top-center",
+                        icon: '🎓'
+                    });
+                });
+            }
+
+            // Gestion de la sortie automatique
             const handleClose = () => {
                 api.dispose();
                 router.push(redirectUrl);
@@ -82,7 +99,7 @@ export default function JitsiMeetComponent({ roomName, userName, userEmail, isAd
             api.addEventListener('videoConferenceLeft', handleClose);
             api.addEventListener('readyToClose', handleClose);
 
-            // Give specific rights based on role
+            // Droits de modérateur
             if (isAdmin) {
                 api.executeCommand('subject', 'Session Magistrale - CRYPTE');
             }
