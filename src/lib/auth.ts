@@ -28,10 +28,16 @@ export const authOptions: NextAuthOptions = {
                 });
 
                 if (authError) {
-                    console.error("❌ Supabase Auth Error:", authError.message);
+                    console.error("❌ Supabase Auth Detailed Error:", {
+                        message: authError.message,
+                        status: authError.status,
+                        email: cleanEmail
+                    });
+
                     if (authError.message.includes("Email not confirmed")) {
                         throw new Error("EMAIL_NOT_VERIFIED");
                     }
+                    // Throw the specific message if it's helpful
                     throw new Error("Invalid credentials");
                 }
 
